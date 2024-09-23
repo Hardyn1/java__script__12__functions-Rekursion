@@ -79,3 +79,26 @@ function printFullName(firstName, lastName){
 
 let rez = printFullName('Sergey', 'Demin');
 console.log(rez); // Sergey Demin.
+
+// CALL / APPLY / BIND.
+// (не вырывай фразу из контекста).
+function printWord(){
+    console.log(this) // this указывает текущий обьект.
+};
+
+let user1 = {
+    name: 'Danil',
+    foo: printWord 
+};
+
+let user2 = {
+    name: 'Kostja',
+    foo: printWord
+};
+
+// THIS ДИНАМИЧЕН УКАЗЫВАЕТ НА РАЗНЫЕ ФУНКЦИИ. 
+user1.foo(); // Danil. Обьект и функцию printWord;
+user2.foo(); // Kostja.
+printWord(); // ПОЛУЧИЛИ ГЛОБАЛЬНЫЙ ОБЬЕКТ WINDOW, получили всего его свойства.
+
+
