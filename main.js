@@ -101,4 +101,52 @@ user1.foo(); // Danil. Обьект и функцию printWord;
 user2.foo(); // Kostja.
 printWord(); // ПОЛУЧИЛИ ГЛОБАЛЬНЫЙ ОБЬЕКТ WINDOW, получили всего его свойства.
 
+// BIND.
+let useR = {
+    name: 'Maria',
+    age: 20,
+    printAge: function(text){
+        console.log(' Сейчас мне ' + this.age + text);
+    }
+};
 
+useR.printAge();
+// ПЕРЕДАЕМ ФУНКЦИЮ В setTimeout.
+// SETTIMEOUT ГЛОБАЛЬНАЯ ФУНКЦИЯ И ОНА ПОТЕРЯЛА КОНТЕКСТ THIS.AGE.
+// setTimeout УСТАНАВЛИВАЕТ THIS КАК ГЛОБАЛЬНЫЙ ОБЬЕКТ.
+// ОН КАК БЫ ВЫЗЫВАЕТ WINDOW.PRINTAGE, ТАК КАК THIS У WINDOW НЕТ, МЫ ПОЛУЧАЕМ UNDEFINED.
+// this просто потерял контекст.
+ 
+
+setTimeout(useR.printAge, 1000); // СЕЙЧАС МНЕ UNDEFINED.
+
+// 1 ПРИМЕР СОЗДАТЬ ЗАМЫКАНИЕ.
+setTimeout(function(){
+    useR.printAge();   
+}, 1000);
+
+// 2 МЕТОД BIND.
+// ВОЗВРАЩАЕТ ФУНКЦИЮ, НЕ ВЫЗЫВАЕТ.
+// С ПОМОЩЬЮ МЕТОДА BIND МОЖНО ЗАФИКСИРОВАТЬ КОНТЕКСТ THIS.
+// Так же 2 параметром можно передавать какой то текст. Добавил на 109 строке.
+// НО BIND НЕ ВЫЗЫВАЕТ ФУНКЦИЮ. Надо присвоить к переменной.
+let context = useR.printAge.bind(useR, 'text is bind');
+setTimeout(context, 1000); // СЕЙЧАС МНЕ 20. / СЕЙЧАС МНЕ 20 TEXT IS BIND.
+
+// 3 МЕТОД CALL.
+// НЕ ВОЗВРАЩАЕТ ФУНКЦИЮ, А СРАЗУ ВЫЗЫВАЕТ.
+function printAge(...text){
+
+    console.log(' Right now im ' + this.age + ' and ' + text);
+
+};
+// ОТЛИЧИЕ CALL & BAND. BIND НАДО В ПЕРЕМЕННУЮ И ВОЗВРАЩАЕТ ФУНКЦИЮ.
+// CALL ОБРАТНЫЕ ДЕЙСТВИЯ.
+// 1 АРГУМЕНТ USER.
+printAge.call(useR, 'happy');
+
+// 3 МЕТОД APPLY.
+// APPLY КАК И CALL ВЫЗЫВАЕТ СРАЗУ ФУНКЦИЮ.
+// 2 АРГУМЕНТОМ МОЖЕТ ПРИНИМАТЬ МАССИВ НЕСКОЛЬКИХ ЗНАЧЕНИЙ.
+// ЧТОБЫ РАСКРЫТЬ МАССИВ ДАННЫХ НУЖНО В ПАРАМЕТРЕ ФУНКЦИИ УКАЗАТЬ ... ПЕРЕД ПАРАМЕТРОМ.
+printAge.apply(useR, ['over', 'over']); // Right now im 20 and over.
