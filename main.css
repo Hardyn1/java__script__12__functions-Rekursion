@@ -13,3 +13,47 @@
     border-radius: 50%;
     background-color: red;
 };
+
+.clock-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    top: 0;
+    right: 0;
+    left: 0;
+    
+}
+
+.clock {
+    max-width: 300px;
+    width: 100%;
+    height: 300px;
+    background-image: url("img/grainy-gradient-background-red-white-blue-colors-with-soft-faded-watercolor-border-texture_927344-24167.avif");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 1px solid black;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.clock-text {
+    font-size: 30px;
+    position: absolute;
+    top: 70px;
+    right: 100px;
+    font-family: fantasy;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+#show-time {
+    color: white;
+}
