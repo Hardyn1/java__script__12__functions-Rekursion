@@ -12,9 +12,9 @@ function factorial(r){
 
     if(r === 0){
         return 1;
-    } else {
-        return r * factorial(r-1);
     };
+
+    return r * factorial(r-1);
 };
 
 let rezultat = factorial(5);
@@ -99,7 +99,7 @@ function addZeroBefore(NUM){
 addZeroBefore(todayDate, 1000);
 
 
-setInterval(todayDate, 100000);
+setInterval(todayDate, 1000);
 
 
 /* 
@@ -112,12 +112,12 @@ setInterval(todayDate, 100000);
 
 */
 
-function rekursia(n){
-    if(1 == n) {
+function recursion (n){
+    if(n == 1) {
         return 1;
     } else {
-        return n + rekursia(n - 1);
+        return n + recursion(n - 1);
     };
 };
 
-console.log(rekursia(5));
+console.log(recursion(5));
